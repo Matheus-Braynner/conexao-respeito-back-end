@@ -19,8 +19,6 @@ public class TeacherDTO {
 
     private String email;
 
-    private String password;
-
     private String postalCode;
 
     private String address;
@@ -34,8 +32,6 @@ public class TeacherDTO {
     private String educationalIntitution;
 
     private String registration;
-
-    private String cpf;
 
     private LocalDate birthDate;
 }

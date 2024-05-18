@@ -26,8 +26,6 @@ public class StudentDTO {
 
     private String registration;
 
-    private String cpf;
-
     private String postalCode;
 
     private String address;
@@ -41,6 +39,4 @@ public class StudentDTO {
     private String educationalIntitution;
 
     private String email;
-
-    private String password;
 }

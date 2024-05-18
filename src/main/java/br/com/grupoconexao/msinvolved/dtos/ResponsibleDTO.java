@@ -23,8 +23,6 @@ public class ResponsibleDTO {
 
     private String studentRegistration;
 
-    private String cpf;
-
     private String postalCode;
 
     private String address;
@@ -38,6 +36,4 @@ public class ResponsibleDTO {
     private String educationalIntitution;
 
     private String email;
-
-    private String password;
 }
