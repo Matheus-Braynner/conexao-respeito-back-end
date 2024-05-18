@@ -99,7 +99,7 @@ public class InvolvedServiceImpl implements InvolvedService {
     public Object authInvolvedForLogin(AuthInvolvedFormsDTO authInvolvedForms) {
         try {
             List<Object> resultList = new ArrayList<>();
-            Optional<Student> studentFound = findByEmail(authInvolvedForms.getEmail());
+            Optional<Student> studentFound = studentRepository.findByEmail(authInvolvedForms.getEmail());
             log.info("Student found: {}", studentFound);
 
             var teacherFound = teacherRepository.findByEmail(authInvolvedForms.getEmail());
@@ -146,10 +146,6 @@ public class InvolvedServiceImpl implements InvolvedService {
             }
         }
        throw new AuthInvolvedException("Email or password wrong!");
-    }
-
-    public Optional<Student> findByEmail(String email) {
-        return studentRepository.findByEmail(email);
     }
 
     private void associateResponsibleToStudent(String studentRegistration, Responsible responsible) {
