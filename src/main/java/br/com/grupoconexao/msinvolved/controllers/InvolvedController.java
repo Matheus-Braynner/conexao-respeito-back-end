@@ -1,9 +1,12 @@
 package br.com.grupoconexao.msinvolved.controllers;
 
 
-import br.com.grupoconexao.msinvolved.entities.Responsible;
-import br.com.grupoconexao.msinvolved.entities.Student;
-import br.com.grupoconexao.msinvolved.entities.Teacher;
+import br.com.grupoconexao.msinvolved.dtos.ResponsibleDTO;
+import br.com.grupoconexao.msinvolved.dtos.ResponsibleFormsDTO;
+import br.com.grupoconexao.msinvolved.dtos.StudentDTO;
+import br.com.grupoconexao.msinvolved.dtos.StudentFormsDTO;
+import br.com.grupoconexao.msinvolved.dtos.TeacherDTO;
+import br.com.grupoconexao.msinvolved.dtos.TeacherFormsDTO;
 import br.com.grupoconexao.msinvolved.services.InvolvedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,19 +24,17 @@ public class InvolvedController {
     private final InvolvedService involvedService;
 
     @PostMapping(value = "/teacher")
-    public ResponseEntity<Teacher> insertTeacher(@RequestBody Teacher teacher) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.insertTeacher(teacher));
+    public ResponseEntity<TeacherDTO> registerTeacher(@RequestBody TeacherFormsDTO teacher) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerTeacher(teacher));
     }
 
     @PostMapping(value = "/student")
-    public ResponseEntity<Student> insertStudent(@RequestBody Student student) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.insertStudent(student));
+    public ResponseEntity<StudentDTO> registerStudent(@RequestBody StudentFormsDTO studentForms) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerStudent(studentForms));
     }
 
     @PostMapping(value = "/responsible")
-    public ResponseEntity<Responsible> insertResponsible(@RequestBody Responsible responsible) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.insertResponsible(responsible));
+    public ResponseEntity<ResponsibleDTO> registerResponsible(@RequestBody ResponsibleFormsDTO responsible) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerResponsible(responsible));
     }
-
-
 }

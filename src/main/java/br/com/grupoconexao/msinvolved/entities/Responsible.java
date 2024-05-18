@@ -2,11 +2,22 @@ package br.com.grupoconexao.msinvolved.entities;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -17,13 +28,15 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @EqualsAndHashCode
 @Builder
-public class Responsible {
+public class Responsible implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 7382051339840945621L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long idResponsible;
-
 
     @Column(name = "fullname")
     private String fullname;
@@ -31,13 +44,10 @@ public class Responsible {
     @Column(name = "birthDate")
     private LocalDate birthDate;
 
-    @Column(name = "nameResponsible")
-    private String nameResponsible;
-
     @Column(name = "nameTutoredStudent")
     private String nameTutoredStudent;
 
-    @Column(name = "studentRegistration")
+    @Column(name = "studentRegistration", unique = true)
     private String studentRegistration;
 
     @CPF
@@ -56,13 +66,11 @@ public class Responsible {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
     @Column(name = "educationalIntitution")
     private String educationalIntitution;
-
 
     @Email
     @Column(name = "email")

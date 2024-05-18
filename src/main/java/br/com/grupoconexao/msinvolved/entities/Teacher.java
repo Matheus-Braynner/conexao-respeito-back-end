@@ -2,7 +2,12 @@ package br.com.grupoconexao.msinvolved.entities;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,6 +15,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +26,10 @@ import java.time.LocalDate;
 @Data
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @EqualsAndHashCode
-public class Teacher {
+public class Teacher implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -8112011072266664932L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

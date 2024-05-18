@@ -5,33 +5,48 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class TeacherDTO {
+public class TeacherFormsDTO {
 
-    private Long idTeacher;
-
+    @NotNull
     private String fullname;
 
+    @NotNull
     private String email;
 
+    @NotNull
+    private String password;
+
+    @NotNull
     private String postalCode;
 
+    @NotNull
     private String address;
 
+    @NotNull
     private String city;
 
+    @NotNull
     private String neighborhood;
 
+    @NotNull
     private String phoneNumber;
 
+    @NotNull
     private String educationalIntitution;
 
+    @NotNull
     private String registration;
 
+    @NotNull
+    private String cpf;
+
+    @NotNull
     private LocalDate birthDate;
 }
