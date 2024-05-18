@@ -1,6 +1,6 @@
 package br.com.grupoconexao.msinvolved.services;
 
-
+import br.com.grupoconexao.msinvolved.dtos.AuthInvolvedFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.StudentDTO;
@@ -14,12 +14,17 @@ import br.com.grupoconexao.msinvolved.mappers.InvolvedMapper;
 import br.com.grupoconexao.msinvolved.repositories.ResponsibleRepository;
 import br.com.grupoconexao.msinvolved.repositories.StudentRepository;
 import br.com.grupoconexao.msinvolved.repositories.TeacherRepository;
+import br.com.grupoconexao.msinvolved.services.exceptions.AuthInvolvedException;
 import br.com.grupoconexao.msinvolved.services.exceptions.CannotCreateInvolvedException;
 import br.com.grupoconexao.msinvolved.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -91,11 +96,68 @@ public class InvolvedServiceImpl implements InvolvedService {
         return responsibleDTO;
     }
 
+    public Object authInvolvedForLogin(AuthInvolvedFormsDTO authInvolvedForms) {
+        try {
+            List<Object> resultList = new ArrayList<>();
+            Optional<Student> studentFound = findByEmail(authInvolvedForms.getEmail());
+            log.info("Student found: {}", studentFound);
+
+            var teacherFound = teacherRepository.findByEmail(authInvolvedForms.getEmail());
+            log.info("Teacher found: {}", teacherFound);
+
+            var responsibleFound = responsibleRepository.findByEmail(authInvolvedForms.getEmail());
+            log.info("Responsible found: {}", teacherFound);
+
+            studentFound.ifPresent(resultList::add);
+            teacherFound.ifPresent(resultList::add);
+            responsibleFound.ifPresent(resultList::add);
+
+            Object authObject = checkEmailAndPasswordToAuth(resultList, authInvolvedForms);
+            log.info("Auth object value: {}", authObject);
+
+            return authObject;
+        } catch (AuthInvolvedException e) {
+            log.error("Email not found in db");
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error");
+            throw e;
+        }
+    }
+
+    private Object checkEmailAndPasswordToAuth(List<Object> resultList, AuthInvolvedFormsDTO authInvolvedForms) {
+        for (Object o : resultList) {
+            if (o instanceof Student student) {
+                if (student.getEmail().equals(authInvolvedForms.getEmail())
+                        && bCryptPasswordEncoder.matches(authInvolvedForms.getPassword(), student.getPassword())) {
+                    return involvedMapper.toStudentDTO(student);
+                }
+            } else if (o instanceof Teacher teacher) {
+                if (teacher.getEmail().equals(authInvolvedForms.getEmail()) &&
+                        bCryptPasswordEncoder.matches(authInvolvedForms.getPassword(), teacher.getPassword())) {
+                    return involvedMapper.toTeacherDTO(teacher);
+                }
+            } else {
+                Responsible responsible = (Responsible) o;
+                if (responsible.getEmail().equals(authInvolvedForms.getEmail()) &&
+                        bCryptPasswordEncoder.matches(authInvolvedForms.getPassword(), responsible.getPassword())) {
+                    return involvedMapper.toResponsibleDTO(responsible);
+                }
+            }
+        }
+       throw new AuthInvolvedException("Email or password wrong!");
+    }
+
+    public Optional<Student> findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
     private void associateResponsibleToStudent(String studentRegistration, Responsible responsible) {
         try {
             Student associate = studentRepository.findByRegistration(studentRegistration)
                     .orElseThrow(() -> new ResourceNotFoundException("Not found student"));
             associate.setResponsible(responsible);
+            log.info("Student to associate: {}", associate);
 
             studentRepository.save(associate);
         } catch (Exception e) {
