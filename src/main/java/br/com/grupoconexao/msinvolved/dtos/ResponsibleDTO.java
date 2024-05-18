@@ -1,5 +1,6 @@
 package br.com.grupoconexao.msinvolved.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponsibleDTO {
 
     private Long idResponsible;

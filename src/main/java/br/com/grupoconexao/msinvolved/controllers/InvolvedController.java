@@ -1,6 +1,7 @@
 package br.com.grupoconexao.msinvolved.controllers;
 
 
+import br.com.grupoconexao.msinvolved.dtos.AuthInvolvedFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.StudentDTO;
@@ -36,5 +37,10 @@ public class InvolvedController {
     @PostMapping(value = "/responsible")
     public ResponseEntity<ResponsibleDTO> registerResponsible(@RequestBody ResponsibleFormsDTO responsible) {
         return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerResponsible(responsible));
+    }
+
+    @PostMapping(value = "/auth/login")
+    public ResponseEntity<Object> loginAuth(@RequestBody AuthInvolvedFormsDTO authInvolvedFormsDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(involvedService.authInvolvedForLogin(authInvolvedFormsDTO));
     }
 }

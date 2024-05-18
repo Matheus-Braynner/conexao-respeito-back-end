@@ -1,5 +1,8 @@
 package br.com.grupoconexao.msinvolved.controllers.handler;
 
+import br.com.grupoconexao.msinvolved.services.exceptions.AuthInvolvedException;
+import br.com.grupoconexao.msinvolved.services.exceptions.CannotCreateInvolvedException;
+import br.com.grupoconexao.msinvolved.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,30 @@ public class ControllerExceptionHandler {
         for (FieldError x : e.getBindingResult().getFieldErrors()) {
             err.addError(x.getField(), x.getDefaultMessage());
         }
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        String error = e.getMessage();
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(CannotCreateInvolvedException.class)
+    public ResponseEntity<StandardError> cannotCreateInvolvedException(CannotCreateInvolvedException e, HttpServletRequest request) {
+        String error = "Cannot create involved!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(AuthInvolvedException.class)
+    public ResponseEntity<StandardError> authInvolvedException(AuthInvolvedException e, HttpServletRequest request) {
+        String error = "cannot auth involved!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }

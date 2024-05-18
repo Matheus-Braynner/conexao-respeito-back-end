@@ -1,5 +1,6 @@
 package br.com.grupoconexao.msinvolved.services;
 
+import br.com.grupoconexao.msinvolved.dtos.AuthInvolvedFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.StudentDTO;
@@ -14,4 +15,6 @@ public interface InvolvedService {
     TeacherDTO registerTeacher(TeacherFormsDTO teacher);
 
     ResponsibleDTO registerResponsible(ResponsibleFormsDTO responsible);
+
+    Object authInvolvedForLogin(AuthInvolvedFormsDTO authInvolvedForms);
 }
