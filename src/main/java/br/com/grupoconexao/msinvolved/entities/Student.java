@@ -2,7 +2,14 @@ package br.com.grupoconexao.msinvolved.entities;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,6 +17,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +28,10 @@ import java.time.LocalDate;
 @Data
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @EqualsAndHashCode(callSuper = false)
-public class Student {
+public class Student implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4431944315874865590L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +46,10 @@ public class Student {
 
     @Column(name = "nameResponsible")
     private String nameResponsible;
+
+    @OneToOne
+    @JoinColumn(name = "responsible_id", referencedColumnName = "idResponsible")
+    private Responsible responsible;
 
     @Column(name = "registration", unique = true)
     private String registration;
@@ -60,7 +76,6 @@ public class Student {
 
     @Column(name = "educationalIntitution")
     private String educationalIntitution;
-
 
     @Email
     @Column(name = "email")
