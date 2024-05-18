@@ -24,7 +24,7 @@ public class StudentDTO {
 
     private String nameResponsible;
 
-    private Responsible responsible;
+    private ResponsibleDTO responsible;
 
     private String registration;
 
