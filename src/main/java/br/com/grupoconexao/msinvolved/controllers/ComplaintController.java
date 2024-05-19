@@ -21,13 +21,13 @@ public class ComplaintController {
 
     private final ComplaintService complaintService;
 
-    @PostMapping("/{involvedCpf}")
+    @PostMapping(value = "/{involvedCpf}")
     public ResponseEntity<ComplaintDTO> registerTeacher(@RequestBody ComplaintFormsDTO complaintFormsDTO,
                                                         @PathVariable String involvedCpf) {
         return ResponseEntity.status(HttpStatus.CREATED).body(complaintService.registerComplaint(complaintFormsDTO, involvedCpf));
     }
 
-    @GetMapping("/{complaintId}")
+    @GetMapping(value = "/{complaintId}")
     public ResponseEntity<ComplaintDTO> getComplaintById(@PathVariable Long complaintId) {
         return ResponseEntity.status(HttpStatus.OK).body(complaintService.getComplaintById(complaintId));
     }

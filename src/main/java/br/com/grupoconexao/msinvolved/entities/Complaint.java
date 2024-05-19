@@ -29,15 +29,15 @@ public class Complaint {
     @EqualsAndHashCode.Include
     private Long idComplaint;
 
-    @Column(name = "educationalInstitution")
+    @Column(name = "educational_institution")
     private String educationalInstitution;
 
-    @Column(name = "nameAggressor")
+    @Column(name = "name_aggressor")
     private String nameAggressor;
 
-    @Column(name = "placeViolationOccurred")
+    @Column(name = "place_violation_occurred")
     private String placeViolationOccurred;
 
-    @Column(name = "complaintReason")
+    @Column(name = "complaint_reason")
     private String complaintReason;
 }
