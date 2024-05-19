@@ -9,6 +9,7 @@ import br.com.grupoconexao.msinvolved.repositories.ResponsibleRepository;
 import br.com.grupoconexao.msinvolved.repositories.StudentRepository;
 import br.com.grupoconexao.msinvolved.repositories.TeacherRepository;
 import br.com.grupoconexao.msinvolved.services.exceptions.CpfNotValidForComplaintException;
+import br.com.grupoconexao.msinvolved.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public ComplaintDTO registerComplaint(ComplaintFormsDTO complaintFormsDTO, String involvedCpf) {
 
-        Complaint formsToComplaint = complaintMapper.toComplaint(complaintFormsDTO);
-        log.info("Complaint: {}", formsToComplaint);
+        var formsToComplaint = complaintMapper.toComplaint(complaintFormsDTO);
+        log.info("forms to complaint: {}", formsToComplaint);
 
         Boolean isValidCpf = verifyIfCpfIsValid(involvedCpf);
 
@@ -43,11 +44,24 @@ public class ComplaintServiceImpl implements ComplaintService {
             throw new CpfNotValidForComplaintException("Cpf is not valid for register complaint");
         }
 
-        Complaint complaintSaved = complaintRepository.save(formsToComplaint);
+        var complaintSaved = complaintRepository.save(formsToComplaint);
         log.info("ComplaintSaved: {}", complaintSaved);
 
-        ComplaintDTO complaintDTO = complaintMapper.toComplaintDTO(complaintSaved);
+        var complaintDTO = complaintMapper.toComplaintDTO(complaintSaved);
         log.info("complaintDTO: {}", complaintDTO);
+
+        return complaintDTO;
+    }
+
+    @Override
+    public ComplaintDTO getComplaintById(Long complaintId) {
+
+        var complaintFound = complaintRepository.findById(complaintId)
+                .orElseThrow(()-> new ResourceNotFoundException("Complaint not found!"));
+        log.info("Complaint: {}", complaintFound);
+
+        var complaintDTO = complaintMapper.toComplaintDTO(complaintFound);
+        log.info("to complaintDTO: {}", complaintDTO);
 
         return complaintDTO;
     }
