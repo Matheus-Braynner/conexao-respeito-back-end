@@ -25,8 +25,8 @@ public class InvolvedController {
     private final InvolvedService involvedService;
 
     @PostMapping(value = "/teacher")
-    public ResponseEntity<TeacherDTO> registerTeacher(@RequestBody TeacherFormsDTO teacher) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerTeacher(teacher));
+    public ResponseEntity<TeacherDTO> registerTeacher(@RequestBody TeacherFormsDTO teacherForms) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerTeacher(teacherForms));
     }
 
     @PostMapping(value = "/student")
@@ -35,8 +35,8 @@ public class InvolvedController {
     }
 
     @PostMapping(value = "/responsible")
-    public ResponseEntity<ResponsibleDTO> registerResponsible(@RequestBody ResponsibleFormsDTO responsible) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerResponsible(responsible));
+    public ResponseEntity<ResponsibleDTO> registerResponsible(@RequestBody ResponsibleFormsDTO responsibleForms) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(involvedService.registerResponsible(responsibleForms));
     }
 
     @PostMapping(value = "/auth/login")

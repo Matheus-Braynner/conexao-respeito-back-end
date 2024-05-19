@@ -35,7 +35,7 @@ public class ResponsibleDTO {
 
     private String phoneNumber;
 
-    private String educationalIntitution;
+    private String educationalInstitution;
 
     private String email;
 }

@@ -31,7 +31,7 @@ public class TeacherDTO {
 
     private String phoneNumber;
 
-    private String educationalIntitution;
+    private String educationalInstitution;
 
     private String registration;
 

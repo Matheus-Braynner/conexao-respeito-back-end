@@ -1,6 +1,5 @@
 package br.com.grupoconexao.msinvolved.dtos;
 
-import br.com.grupoconexao.msinvolved.entities.Responsible;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +37,7 @@ public class StudentDTO {
 
     private String phoneNumber;
 
-    private String educationalIntitution;
+    private String educationalInstitution;
 
     private String email;
 }
