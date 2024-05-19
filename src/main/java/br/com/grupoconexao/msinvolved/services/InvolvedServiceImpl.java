@@ -1,6 +1,7 @@
 package br.com.grupoconexao.msinvolved.services;
 
 import br.com.grupoconexao.msinvolved.dtos.AuthInvolvedFormsDTO;
+import br.com.grupoconexao.msinvolved.dtos.QueryStudentFilterDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleDTO;
 import br.com.grupoconexao.msinvolved.dtos.ResponsibleFormsDTO;
 import br.com.grupoconexao.msinvolved.dtos.StudentDTO;
@@ -17,14 +18,19 @@ import br.com.grupoconexao.msinvolved.repositories.TeacherRepository;
 import br.com.grupoconexao.msinvolved.services.exceptions.AuthInvolvedException;
 import br.com.grupoconexao.msinvolved.services.exceptions.CannotCreateInvolvedException;
 import br.com.grupoconexao.msinvolved.services.exceptions.ResourceNotFoundException;
+import br.com.grupoconexao.msinvolved.specification.QueryStudentSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -126,6 +132,16 @@ public class InvolvedServiceImpl implements InvolvedService {
             log.error("Unexpected error");
             throw e;
         }
+    }
+
+    @Override
+    public List<StudentDTO> getStudentsByEducationalInstitution(QueryStudentFilterDTO filter) {
+
+        Specification<Student> specification = QueryStudentSpecification.findAll(filter);
+
+        Page<Student> page = studentRepository.findAll(specification, PageRequest.of(filter.getPage(), filter.getSize()));
+
+        return page.stream().map(involvedMapper::toStudentDTO).collect(Collectors.toList());
     }
 
     private Object checkEmailAndPasswordToAuth(List<Object> resultList, AuthInvolvedFormsDTO authInvolvedForms) {

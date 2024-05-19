@@ -1,7 +1,5 @@
 package br.com.grupoconexao.msinvolved.entities;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +22,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @EqualsAndHashCode
 public class Teacher implements Serializable {
 
@@ -46,7 +43,7 @@ public class Teacher implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "postalCode")
+    @Column(name = "postal_code")
     private String postalCode;
 
     @Column(name = "address")
@@ -58,10 +55,10 @@ public class Teacher implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "educationalInstitution")
+    @Column(name = "educational_institution")
     private String educationalInstitution;
 
     @Column(name = "registration", unique = true)
@@ -71,6 +68,6 @@ public class Teacher implements Serializable {
     @Column(unique = true)
     private String cpf;
 
-    @Column(name = "birthDate")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 }

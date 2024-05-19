@@ -41,10 +41,10 @@ public class Student implements Serializable {
     @Column(name = "fullname")
     private String fullname;
 
-    @Column(name = "birthDate")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "nameResponsible")
+    @Column(name = "name_responsible")
     private String nameResponsible;
 
     @OneToOne
@@ -58,7 +58,7 @@ public class Student implements Serializable {
     @Column(unique = true)
     private String cpf;
 
-    @Column(name = "postalCode")
+    @Column(name = "postal_code")
     private String postalCode;
 
     @Column(name = "address")
@@ -71,10 +71,10 @@ public class Student implements Serializable {
     private String neighborhood;
 
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "educationalInstitution")
+    @Column(name = "educational_institution")
     private String educationalInstitution;
 
     @Email
