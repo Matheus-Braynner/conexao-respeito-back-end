@@ -43,21 +43,21 @@ public class InvolvedServiceImpl implements InvolvedService {
 
     @Override
     public StudentDTO registerStudent(StudentFormsDTO studentForms) {
-        Student formsToStudent = involvedMapper.toStudent(studentForms);
+        var formsToStudent = involvedMapper.toStudent(studentForms);
         var existStudent = checkIfAlreadyExistInDatabase(formsToStudent, formsToStudent.getRegistration());
 
         if (existStudent) {
             throw new CannotCreateInvolvedException("Already exist a student registered!");
         }
 
-        Responsible findResponsibleByStudentRegistration = responsibleRepository
+        var findResponsibleByStudentRegistration = responsibleRepository
                 .findFirstByStudentRegistration(formsToStudent.getRegistration());
         formsToStudent.setResponsible(findResponsibleByStudentRegistration);
         formsToStudent.setPassword(bCryptPasswordEncoder.encode(formsToStudent.getPassword()));
         studentRepository.save(formsToStudent);
         log.info("Student saved: {}", formsToStudent);
 
-        StudentDTO studentDTO = involvedMapper.toStudentDTO(formsToStudent);
+        var studentDTO = involvedMapper.toStudentDTO(formsToStudent);
         log.info("StudentDTO: {}", studentDTO);
 
         return studentDTO;
@@ -65,7 +65,7 @@ public class InvolvedServiceImpl implements InvolvedService {
 
     @Override
     public TeacherDTO registerTeacher(TeacherFormsDTO teacherForms) {
-        Teacher formsToTeacher = involvedMapper.toTeacher(teacherForms);
+        var formsToTeacher = involvedMapper.toTeacher(teacherForms);
         var existTeacher = checkIfAlreadyExistInDatabase(formsToTeacher, formsToTeacher.getRegistration());
 
         if (existTeacher) {
@@ -73,10 +73,10 @@ public class InvolvedServiceImpl implements InvolvedService {
         }
 
         formsToTeacher.setPassword(bCryptPasswordEncoder.encode(formsToTeacher.getPassword()));
-        Teacher saveTeacher = teacherRepository.save(formsToTeacher);
+        var saveTeacher = teacherRepository.save(formsToTeacher);
         log.info("Teacher saved: {}", saveTeacher);
 
-        TeacherDTO teacherDTO = involvedMapper.toTeacherDTO(saveTeacher);
+        var teacherDTO = involvedMapper.toTeacherDTO(saveTeacher);
         log.info("TeacherDTO: {}", teacherDTO);
 
         return teacherDTO;
@@ -84,10 +84,10 @@ public class InvolvedServiceImpl implements InvolvedService {
 
     @Override
     public ResponsibleDTO registerResponsible(ResponsibleFormsDTO responsibleForms) {
-        Responsible formsToResponsible = involvedMapper.toResponsible(responsibleForms);
+        var formsToResponsible = involvedMapper.toResponsible(responsibleForms);
 
         formsToResponsible.setPassword(bCryptPasswordEncoder.encode(formsToResponsible.getPassword()));
-        Responsible saveResponsible = responsibleRepository.save(formsToResponsible);
+        var saveResponsible = responsibleRepository.save(formsToResponsible);
         log.info("Responsible saved: {}", saveResponsible);
 
         associateResponsibleToStudent(formsToResponsible.getStudentRegistration(), saveResponsible);
