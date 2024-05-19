@@ -69,8 +69,8 @@ public class Responsible implements Serializable {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "educationalIntitution")
-    private String educationalIntitution;
+    @Column(name = "educationalInstitution")
+    private String educationalInstitution;
 
     @Email
     @Column(name = "email")

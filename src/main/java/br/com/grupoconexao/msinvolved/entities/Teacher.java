@@ -61,8 +61,8 @@ public class Teacher implements Serializable {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "educationalIntitution")
-    private String educationalIntitution;
+    @Column(name = "educationalInstitution")
+    private String educationalInstitution;
 
     @Column(name = "registration", unique = true)
     private String registration;

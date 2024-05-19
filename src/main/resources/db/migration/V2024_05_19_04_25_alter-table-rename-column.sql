@@ -1,0 +1,8 @@
+ALTER TABLE tb_student
+RENAME COLUMN educational_intitution to educational_institution
+
+ALTER TABLE tb_teacher
+RENAME COLUMN educational_intitution to educational_institution
+
+ALTER TABLE tb_responsible
+RENAME COLUMN educational_intitution to educational_institution

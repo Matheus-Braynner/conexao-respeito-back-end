@@ -45,7 +45,7 @@ public class ResponsibleFormsDTO {
     private String phoneNumber;
 
     @NotNull
-    private String educationalIntitution;
+    private String educationalInstitution;
 
     @NotNull
     private String email;

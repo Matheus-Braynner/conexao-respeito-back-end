@@ -2,6 +2,7 @@ package br.com.grupoconexao.msinvolved.controllers.handler;
 
 import br.com.grupoconexao.msinvolved.services.exceptions.AuthInvolvedException;
 import br.com.grupoconexao.msinvolved.services.exceptions.CannotCreateInvolvedException;
+import br.com.grupoconexao.msinvolved.services.exceptions.CpfNotValidForComplaintException;
 import br.com.grupoconexao.msinvolved.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.postgresql.util.PSQLException;
@@ -66,6 +67,14 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(PSQLException.class)
     public ResponseEntity<StandardError> psqlException(PSQLException e, HttpServletRequest request) {
         String error = "check the fields!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, error, request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(CpfNotValidForComplaintException.class)
+    public ResponseEntity<StandardError> cpfNotValidForComplaintException(CpfNotValidForComplaintException e, HttpServletRequest request) {
+        String error = "Cpf is not valid to register a complaint!";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), error, error, request.getRequestURI());
         return ResponseEntity.status(status).body(err);

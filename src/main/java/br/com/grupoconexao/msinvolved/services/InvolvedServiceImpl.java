@@ -41,6 +41,7 @@ public class InvolvedServiceImpl implements InvolvedService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Override
     public StudentDTO registerStudent(StudentFormsDTO studentForms) {
         Student formsToStudent = involvedMapper.toStudent(studentForms);
         var existStudent = checkIfAlreadyExistInDatabase(formsToStudent, formsToStudent.getRegistration());
@@ -62,6 +63,7 @@ public class InvolvedServiceImpl implements InvolvedService {
         return studentDTO;
     }
 
+    @Override
     public TeacherDTO registerTeacher(TeacherFormsDTO teacherForms) {
         Teacher formsToTeacher = involvedMapper.toTeacher(teacherForms);
         var existTeacher = checkIfAlreadyExistInDatabase(formsToTeacher, formsToTeacher.getRegistration());
@@ -80,6 +82,7 @@ public class InvolvedServiceImpl implements InvolvedService {
         return teacherDTO;
     }
 
+    @Override
     public ResponsibleDTO registerResponsible(ResponsibleFormsDTO responsibleForms) {
         Responsible formsToResponsible = involvedMapper.toResponsible(responsibleForms);
 
@@ -89,13 +92,13 @@ public class InvolvedServiceImpl implements InvolvedService {
 
         associateResponsibleToStudent(formsToResponsible.getStudentRegistration(), saveResponsible);
 
-
         ResponsibleDTO responsibleDTO = involvedMapper.toResponsibleDTO(saveResponsible);
         log.info("ResponsibleDTO: {}", responsibleDTO);
 
         return responsibleDTO;
     }
 
+    @Override
     public Object authInvolvedForLogin(AuthInvolvedFormsDTO authInvolvedForms) {
         try {
             List<Object> resultList = new ArrayList<>();
