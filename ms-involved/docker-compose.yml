@@ -8,8 +8,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgresql
-      POSTGRES_PASSWORD: databasepassword
-      POSTGRES_DB: db_involved
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: db_conexao_respeito
     volumes:
       - pgdata:/var/lib/postgresql/data
 
