@@ -70,6 +70,18 @@ public class InvolvedServiceImpl implements InvolvedService {
     }
 
     @Override
+    public StudentDTO getStudentByRegister(String studentRegister) {
+        var student = studentRepository.findByRegistration(studentRegister)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found!"));
+        log.info("Student: {}", student);
+
+        var studentDTO = involvedMapper.toStudentDTO(student);
+        log.info("StudentDTO: {}", studentDTO);
+
+        return studentDTO;
+    }
+
+    @Override
     public TeacherDTO registerTeacher(TeacherFormsDTO teacherForms) {
         var formsToTeacher = involvedMapper.toTeacher(teacherForms);
         var existTeacher = checkIfAlreadyExistInDatabase(formsToTeacher, formsToTeacher.getRegistration());
