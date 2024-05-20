@@ -15,6 +15,8 @@ public interface InvolvedService {
 
     StudentDTO registerStudent(StudentFormsDTO studentForms);
 
+    StudentDTO getStudentByRegister(String studentRegister);
+
     TeacherDTO registerTeacher(TeacherFormsDTO teacher);
 
     ResponsibleDTO registerResponsible(ResponsibleFormsDTO responsible);
@@ -22,4 +24,6 @@ public interface InvolvedService {
     Object authInvolvedForLogin(AuthInvolvedFormsDTO authInvolvedForms);
 
     List<StudentDTO> getStudentsByEducationalInstitution(QueryStudentFilterDTO filter);
+
+
 }
