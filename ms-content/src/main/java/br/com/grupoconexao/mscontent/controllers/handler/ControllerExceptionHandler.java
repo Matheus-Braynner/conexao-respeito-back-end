@@ -2,6 +2,7 @@ package br.com.grupoconexao.mscontent.controllers.handler;
 
 import br.com.grupoconexao.mscontent.services.exceptions.CannotAttachFileWithDifferentRegistrationException;
 import br.com.grupoconexao.mscontent.services.exceptions.ResourceNotFoundException;
+import feign.FeignException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +54,11 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<StandardError> handleFeignException(FeignException e, HttpServletRequest request) {
+        String error = "Feign error";
+        HttpStatus status = HttpStatus.valueOf(e.status());
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
 }

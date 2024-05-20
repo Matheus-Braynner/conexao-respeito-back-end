@@ -24,3 +24,6 @@ spring:
 ms:
     involved:
         host: ${MS_INVOLVED_URL:http://localhost:8081}
+
+server:
+    port: 8080
