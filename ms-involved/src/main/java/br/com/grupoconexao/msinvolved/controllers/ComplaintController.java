@@ -22,7 +22,7 @@ public class ComplaintController {
     private final ComplaintService complaintService;
 
     @PostMapping(value = "/{involvedCpf}")
-    public ResponseEntity<ComplaintDTO> registerTeacher(@RequestBody ComplaintFormsDTO complaintFormsDTO,
+    public ResponseEntity<ComplaintDTO> registerComplaint(@RequestBody ComplaintFormsDTO complaintFormsDTO,
                                                         @PathVariable String involvedCpf) {
         return ResponseEntity.status(HttpStatus.CREATED).body(complaintService.registerComplaint(complaintFormsDTO, involvedCpf));
     }

@@ -28,7 +28,7 @@ public class ActivitiesController {
     }
 
     @GetMapping(value = "/{idActivity}")
-    ResponseEntity<ActivityDTO> getMaterials(@PathVariable Long idActivity) {
+    ResponseEntity<ActivityDTO> getActivity(@PathVariable Long idActivity) {
         return ResponseEntity.status(HttpStatus.OK).body(activitiesService.getActivity(idActivity));
     }
 
