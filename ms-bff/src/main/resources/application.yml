@@ -1,0 +1,12 @@
+spring:
+    application:
+        name: ms-bff
+
+ms:
+    involved:
+        host: ${MS_INVOLVED_URL:http://localhost:8081}
+    content:
+        host: ${MS_CONTENT_URL:http://localhost:8080}
+
+server:
+    port: 8082
