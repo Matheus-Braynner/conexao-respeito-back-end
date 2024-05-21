@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/db_conexao_respeito
-        username: postgresql
-        password: 123456
+        url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/db_conexao_respeito}
+        username: ${DATABASE_USERNAME:postgresql}
+        password: ${BMS_DATABASE_PASSWORD:123456}
     flyway:
          baselineOnMigrate: true
          locations: classpath:db/migration
