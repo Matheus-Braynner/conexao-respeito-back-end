@@ -176,7 +176,7 @@ public class InvolvedServiceImpl implements InvolvedService {
                 }
             }
         }
-       throw new AuthInvolvedException("Email or password wrong!");
+        throw new AuthInvolvedException("Email or password wrong!");
     }
 
     private void associateResponsibleToStudent(String studentRegistration, Responsible responsible) {
