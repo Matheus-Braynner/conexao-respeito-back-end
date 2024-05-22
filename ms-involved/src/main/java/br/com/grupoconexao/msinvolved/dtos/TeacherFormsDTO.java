@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -18,6 +20,7 @@ public class TeacherFormsDTO {
     private String fullname;
 
     @NotNull
+    @Email
     private String email;
 
     @NotNull
@@ -45,6 +48,7 @@ public class TeacherFormsDTO {
     private String registration;
 
     @NotNull
+    @CPF
     private String cpf;
 
     @NotNull
