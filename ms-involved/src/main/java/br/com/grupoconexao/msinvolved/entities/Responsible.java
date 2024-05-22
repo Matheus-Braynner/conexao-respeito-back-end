@@ -50,7 +50,6 @@ public class Responsible implements Serializable {
     @Column(name = "student_registration", unique = true)
     private String studentRegistration;
 
-    @CPF
     @Column(unique = true)
     private String cpf;
 
@@ -72,7 +71,6 @@ public class Responsible implements Serializable {
     @Column(name = "educational_institution")
     private String educationalInstitution;
 
-    @Email
     @Column(name = "email")
     private String email;
 

@@ -27,3 +27,5 @@ ms:
 
 server:
     port: 8080
+
+src-main-resources: "src/main/resources"

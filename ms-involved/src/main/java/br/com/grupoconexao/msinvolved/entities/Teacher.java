@@ -38,7 +38,6 @@ public class Teacher implements Serializable {
     @Column(name = "fullname")
     private String fullname;
 
-    @Email
     @Column(name = "email")
     private String email;
 
@@ -66,7 +65,6 @@ public class Teacher implements Serializable {
     @Column(name = "registration", unique = true)
     private String registration;
 
-    @CPF
     @Column(unique = true)
     private String cpf;
 

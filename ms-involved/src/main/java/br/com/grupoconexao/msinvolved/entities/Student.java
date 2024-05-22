@@ -56,7 +56,6 @@ public class Student implements Serializable {
     @Column(name = "registration", unique = true)
     private String registration;
 
-    @CPF
     @Column(unique = true)
     private String cpf;
 
