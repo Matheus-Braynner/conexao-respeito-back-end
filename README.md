@@ -153,6 +153,7 @@ ID, FULLNAME, EMAIL, PASSWORD, POSTAL_CODE, ADDRESS, CITY, NEIGHBORHOOD, PHONE_N
 <p></p>
 <h2>Exemplo de um payload para cadastrar uma denuncia:</h2>
 
+```
 {
 "educationalInstitution": "Nome da Instituição",
 "nameAggressor": "Fulano de Tal",
@@ -161,11 +162,39 @@ ID, FULLNAME, EMAIL, PASSWORD, POSTAL_CODE, ADDRESS, CITY, NEIGHBORHOOD, PHONE_N
 }
 ```
 
-{
-"educationalInstitution": "Nome da Instituição",
-"nameAggressor": "Fulano de Tal",
-"placeViolationOccurred": "Local da Violência",
-"complaintReason": "Motivo da Denúncia"
-}
-
 </details>
+
+<details>
+  <summary><a id="id2"><h2><strong>MS Content</strong></h2></summary>
+
+<p> O MS Content tem a responsabilidade de armazenar e gerenciar os dados de atividades e conteúdos. O MS Content possui os seguintes endpoints:</p>
+
+```
+*ACTIVITIES CONTROLLER:*
+
+- POST - /v1/activities/upload
+- GET - /v1/activities/{idActivity}
+- POST - /v1/activities/send-activity
+
+*MATERIALS CONTROLLER:*
+
+- POST - /v1/materials/upload
+- GET - /v1/materials/{idMaterials}
+```
+<p><strong>Campos da tabela activity:</strong></p>
+
+```
+ID, FILE_NAME, DATA
+```
+
+<p><strong>Campos da tabela materials:</strong></p>
+
+```
+ID, FILE_NAME, DATA
+```
+<h2>Exemplo de um payload para cadastrar uma um arquivo de atividades e materiais:</h2>
+
+```
+Content-Type: multipart/form-data
+```
+
