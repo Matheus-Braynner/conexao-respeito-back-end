@@ -60,7 +60,7 @@ public class InvolvedController {
     public ResponseEntity<List<StudentDTO>> getStudentsByEducationalInstitution
             (@RequestParam(name = "educationalInstitution") String educationalInstitution,
              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-             @RequestParam(name = "size", required = false, defaultValue = "1") Integer size,
+             @RequestParam(name = "size", required = false, defaultValue = "9") Integer size,
              @RequestParam(name = "sort", required = false, defaultValue = "DESC") String sort) {
 
         QueryStudentFilterDTO filter = QueryStudentFilterDTO.builder()
