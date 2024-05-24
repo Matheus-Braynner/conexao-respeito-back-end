@@ -7,6 +7,44 @@
   Durante o período estabelecido, serão atribuídas atividades com prazos individuais para o estudante e para os responsáveis no aplicativo. 
   Enquanto para o estudante o foco das atividades será a reeducação para não repetição do ato, para os responsáveis o foco será ensinar qual abordagem seguir e como monitorar essas situações.
 </p>
+
+# Guia para Subir a aplicação com Docker usando IntelliJ
+
+Este guia fornece instruções passo a passo para configurar e executar sua aplicação Spring Boot em um contêiner Docker usando a IDE IntelliJ.
+
+## Pré-requisitos
+
+- Java Development Kit 17 (JDK) instalado
+- IntelliJ IDEA instalado
+- Rancher Desktop instalado e em execução
+- uma ferramenta de administração de banco de dados (DBeaver)
+- Conhecimento básico de Docker
+  -Postman ou Insomnia
+
+## Passos
+
+### 1. Clone o Repositório:
+
+Clone o repositório <code>git clone <URL_DO_SEU_REPOSITORIO></code>
+
+## 2. Abra o Projeto no IntelliJ:
+
+Abra o IntelliJ IDEA e importe o projeto clonado selecionando a opção "Open" no menu e navegando até o diretório do projeto.
+
+## 3. Configure o Docker no IntelliJ:
+
+Certifique-se de que o IntelliJ está configurado para usar o Docker. Você pode verificar isso indo em `File > Settings > Build, Execution, Deployment > Docker` e verificando se o Docker está configurado corretamente.
+
+## 4. Inicialize a Imagem Docker:
+
+Abra o Rancher desktop até o final da inicialização, no local do arquivo `docker-compose.yml` abra o terminal e adicione o seguinte comando <code>docker-compose up</code>
+
+## 6. Acesse a Aplicação:
+
+Após a inicialização do contêiner Docker, você pode acessar inicializar aplicação e fazer as requisições, irei estar disponibilizando os endpoints do postman.
+
+[Postman Collection] https://github.com/Matheus-Braynner/conexao-respeito-back-end/files/15437092/MS-BFF.postman_collection.json
+
 <div align="center">
   <img src="https://github.com/Matheus-Braynner/conexao-respeito-back-end/assets/68668725/06aedf0a-3195-48f4-ad34-c10a32a30854" width="600px"/>
 </div>
