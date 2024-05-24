@@ -23,15 +23,15 @@ public class QueryStudentSpecification {
     public static Specification<Student> findAll(QueryStudentFilterDTO filter) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            addPredicateEqualIfNotBlank(filter.getEducationalInstitution(), criteriaBuilder, root, predicates);
+            addPredicateEqualIfNotBlank(filter.getEducationalInstitution(), EDUCATIONAL_INSTITUTION, criteriaBuilder, root, predicates);
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[]{}));
         };
     }
 
-    private static void addPredicateEqualIfNotBlank(String value, CriteriaBuilder cb, Root<Student> root, List<Predicate> predicates) {
+    private static void addPredicateEqualIfNotBlank(String value, String name, CriteriaBuilder cb, Root<Student> root, List<Predicate> predicates) {
         if (StringUtils.isNotBlank(value)) {
-            predicates.add(cb.equal(root.get(QueryStudentSpecification.EDUCATIONAL_INSTITUTION), value));
+            predicates.add(cb.equal(root.get(name), value));
         }
     }
 }

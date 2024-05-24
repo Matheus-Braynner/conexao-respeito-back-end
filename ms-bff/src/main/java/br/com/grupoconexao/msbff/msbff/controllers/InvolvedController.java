@@ -30,48 +30,48 @@ public class InvolvedController {
 
     private final InvolvedClient involvedClient;
 
-    @PostMapping(value = "/v1/involved/teacher")
+    @PostMapping(value = "/involved/teacher")
     ResponseEntity<TeacherDTO> registerTeacher(@RequestBody TeacherFormsDTO teacherForms) {
         return ResponseEntity.status(HttpStatus.CREATED).body(involvedClient.registerTeacher(teacherForms));
     }
 
-    @PostMapping(value = "/v1/involved/student")
+    @PostMapping(value = "/involved/student")
     ResponseEntity<StudentDTO> registerStudent(@RequestBody StudentFormsDTO studentForms) {
         return ResponseEntity.status(HttpStatus.CREATED).body(involvedClient.registerStudent(studentForms));
     }
 
-    @GetMapping(value = "/v1/involved/student/{studentRegister}")
+    @GetMapping(value = "/involved/student/{studentRegister}")
     ResponseEntity<StudentDTO> getStudentByRegister(@PathVariable String studentRegister) {
         return ResponseEntity.status(HttpStatus.OK).body(involvedClient.getStudentByRegister(studentRegister));
     }
 
-    @PostMapping(value = "/v1/involved/responsible")
+    @PostMapping(value = "/involved/responsible")
     ResponseEntity<ResponsibleDTO> registerResponsible(@RequestBody ResponsibleFormsDTO responsibleForms) {
         return ResponseEntity.status(HttpStatus.CREATED).body(involvedClient.registerResponsible(responsibleForms));
     }
 
-    @PostMapping(value = "/v1/involved/auth/login")
+    @PostMapping(value = "/involved/auth/login")
     ResponseEntity<Object> loginAuth(@RequestBody AuthInvolvedFormsDTO authInvolvedFormsDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(involvedClient.loginAuth(authInvolvedFormsDTO));
     }
 
-    @GetMapping(value = "/v1/involved/student/educational-institution")
+    @GetMapping(value = "/involved/student/educational-institution")
     ResponseEntity<List<StudentDTO>> getStudentsByEducationalInstitution
             (@RequestParam(name = "educationalInstitution") String educationalInstitution,
              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-             @RequestParam(name = "size", required = false, defaultValue = "1") Integer size,
+             @RequestParam(name = "size", required = false, defaultValue = "9") Integer size,
              @RequestParam(name = "sort", required = false, defaultValue = "DESC") String sort) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(involvedClient.getStudentsByEducationalInstitution(educationalInstitution, page, size, sort));
     }
 
-    @PostMapping(value = "/v1/complaint/{involvedCpf}")
+    @PostMapping(value = "/complaint/{involvedCpf}")
     ResponseEntity<ComplaintDTO> registerComplaint(@RequestBody ComplaintFormsDTO complaintFormsDTO,
                                                    @PathVariable String involvedCpf) {
         return ResponseEntity.status(HttpStatus.CREATED).body(involvedClient.registerComplaint(complaintFormsDTO, involvedCpf));
     }
 
-    @GetMapping(value = "/v1/complaint/{complaintId}")
+    @GetMapping(value = "/complaint/{complaintId}")
     ResponseEntity<ComplaintDTO> getComplaintById(@PathVariable Long complaintId) {
         return ResponseEntity.status(HttpStatus.OK).body(involvedClient.getComplaintById(complaintId));
     }
